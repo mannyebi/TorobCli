@@ -5,11 +5,11 @@ import requests
 
 
 
-def send_request(search_query:str, search_size:int):
+def send_request(search_query:str, search_size:int, page:int):
     base_url = "https://api.torob.com/v4/base-product/search/"
     #Parameters for the request
     params = {
-        "page": 1,   #Start with page 1
+        "page": page,   #Start with page 1
         "sort": "popularity",
         "size": search_size,
         "query": search_query,
@@ -33,13 +33,8 @@ def send_request(search_query:str, search_size:int):
         #print(data["count"])
         #print(data["max_price"])
         list_dict = list([item["name1"], item["price"], item["web_client_absolute_url"]] for item in data['results'])
-        context = {"products":list_dict, "max_price":{data["max_price"]}}
+        context = {"products":list_dict, "max_price":data["max_price"], "count":data["count"]}
         # for item in data["results"]:
-        print(list_dict)
         return context
     else:
         print(f"Failed to fetch data: {response.status_code}")
-
-
-
-send_request("تست", 5)
