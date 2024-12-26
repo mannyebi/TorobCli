@@ -250,8 +250,3 @@ def main(stdscr):
         search_size = 10
 # Run the curses application
 curses.wrapper(main)
-
-
-#TODO:
-    #3- error handling
-    #4- humanize
